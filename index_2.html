@@ -8,16 +8,13 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
         body { display: flex; flex-direction: row; height: 100vh; background: #f4f4f4; }
         .sidebar { width: 280px; background: #fff; padding: 15px; overflow-y: auto; border-right: 1px solid #ddd; }
-        .search-container { position: relative; margin-bottom: 10px; }
-        .search-box { padding: 8px 30px 8px 10px; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
-        .search-icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #777; }
+        .search-box { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; margin-bottom: 10px; }
         .tab-container { display: flex; justify-content: space-between; margin-bottom: 10px; }
         .tab { cursor: pointer; padding: 8px; flex: 1; text-align: center; border-bottom: 2px solid transparent; }
         .active-tab { border-bottom: 2px solid #007bff; }
         .symbol-list { list-style: none; }
         .symbol-item { display: flex; justify-content: space-between; padding: 5px 0; }
         .main-content { flex-grow: 1; padding: 15px; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .table-container { overflow-x: auto; background: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
@@ -38,15 +35,12 @@
 </head>
 <body>
     <div class="sidebar">
-        <div class="search-container">
-            <input type="text" class="search-box" id="search" placeholder="Search symbol..." onkeyup="filterSymbols()">
-            <span class="search-icon">🔍</span>
-        </div>
+        <input type="text" class="search-box" placeholder="Search symbol...">
         <div class="tab-container">
             <div class="tab active-tab">Favorites</div>
             <div class="tab">All Symbols</div>
         </div>
-        <ul class="symbol-list" id="symbol-list">
+        <ul class="symbol-list">
             <li class="symbol-item">BTCUSD <span>65,610.65</span></li>
             <li class="symbol-item">AUDCAD <span>0.90669</span></li>
             <li class="symbol-item">NGAS <span>2.728</span></li>
@@ -54,10 +48,7 @@
         </ul>
     </div>
     <div class="main-content">
-        <div class="header">
-            <h2>Positions (5)</h2>
-            <button class="cancel-button">Cancel All Orders</button>
-        </div>
+        <h2>Positions (5)</h2>
         <div class="table-container">
             <table>
                 <tr>
@@ -125,16 +116,14 @@
             <p><strong>Free Margin:</strong> 784.86</p>
             <p><strong>Margin Level:</strong> 2843.31%</p>
         </div>
+        <div class="actions">
+            <button>Cancel All Orders</button>
+            <button>Cancel Limit Orders</button>
+            <button>Cancel Stop Orders</button>
+            <button>Close All Positions</button>
+            <button>Close Profitable Positions</button>
+            <button>Close Losing Positions</button>
+        </div>
     </div>
-    <script>
-        function filterSymbols() {
-            let input = document.getElementById("search").value.toLowerCase();
-            let items = document.querySelectorAll(".symbol-item");
-            items.forEach(item => {
-                let text = item.textContent.toLowerCase();
-                item.style.display = text.includes(input) ? "" : "none";
-            });
-        }
-    </script>
 </body>
 </html>

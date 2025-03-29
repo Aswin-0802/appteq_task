@@ -1,4 +1,6 @@
-
+<?php
+// index.php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +9,15 @@
     <title>Trading Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+	<link href="path/to/fontawesome/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Sidebar -->
     <div id="sidebar-container">
         <?php include('sidebar.php'); ?>
     </div>
 
+    <!-- Main Content -->
     <div class="main-content">
         <div class="header">
 		 <div class="col-sm-5">
@@ -32,8 +37,8 @@
         <div class="table-container">
             <table>
                 <tr>
-                    <th width="4%" height="37">ID</th>
-                    <th width="12%">TIME</th>
+                    <th width="5%" height="37">ID</th>
+                    <th width="11%">TIME</th>
                     <th width="10%">SYMBOL <i class="fas fa-sort-amount-down-alt" style="color: red;"></i></th>
                     <th width="10%">ORDER</th>
                     <th width="10%">LOT</th>
@@ -117,13 +122,13 @@
                 </tr>
 				 <tr style="background-color:#efe8e8">
                     <td height="45" colspan="2">&nbsp;</td>
-                    <td style="border-right:1px solid #cccccc;"><p>Balance : <strong style=" color: blue ; font-size:14px">816.12 </strong>&nbsp;&nbsp</p> </td>
-                    <td style="border-right:1px solid #cccccc;"><p>Equity : <strong style=" color: blue ;font-size:14px">813.47</strong></p></td>
-                    <td style="border-right:1px solid #cccccc;"><p>Used Margin : <strong style=" color: blue ;font-size:14px">28.61</strong></p></td>
-                    <td style="border-right:1px solid #cccccc;"><p>Free Margin : <strong style=" color: blue ;font-size:14px">784.86</strong></p></td>
-					<td style=""><p>Margin Level : <strong style=" color: blue ;font-size:14px">2843.31%</strong></p></td>
+                    <td style="border-right:1px solid #cccccc;"><p>Balance : <strong style=" color: blue ; font-size:16px">816.12 </strong>&nbsp;&nbsp</p> </td>
+                    <td style="border-right:1px solid #cccccc;"><p>Equity : <strong style=" color: blue ;font-size:16px">813.47</strong></p></td>
+                    <td style="border-right:1px solid #cccccc;"><p>Used Margin : <strong style=" color: blue ;font-size:16px">28.61</strong></p></td>
+                    <td style="border-right:1px solid #cccccc;"><p>Free Margin : <strong style=" color: blue ;font-size:16px">784.86</strong></p></td>
+					<td style=""><p>Margin Level : <strong style=" color: blue ;font-size:16px">2843.31%</strong></p></td>
                     <td colspan="4">&nbsp;</td>
-                    <td><strong style="color:red; font-size:14px">-2.65</strong></td>
+                    <td><strong style="color:red">-2.65</strong></td>
                 </tr>
                 <tr>
                   <td height="46" colspan="12"><div align="center" style="font-size: 16px;color: #888;font-weight: bold;">No Order(s) Found</div></td>

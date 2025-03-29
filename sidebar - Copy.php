@@ -1,4 +1,6 @@
-
+<?php
+// sidebar.php
+?>
 <div class="sidebar">
     <div class="search-container">
         <input type="text" class="search-box" id="search" placeholder="Search symbol..." onkeyup="filter()">
@@ -9,6 +11,7 @@
         <div class="tab" id="all-symbols-tab" onclick="switchTab('all-symbols')">All Symbols</div>
     </div>
 
+    <!-- Favorites Symbols Section -->
     <div class="symbol-list" id="favorites-list">
         <ul>
             <li class="symbol-item">BTCUSD <span>65,610.65</span></li>
@@ -18,6 +21,7 @@
         </ul>
     </div>
 
+    <!-- All Symbols Section -->
     <div class="symbol-list" id="all-symbols-list" style="display: none;">
         <ul>
             <li class="symbol-item">BTCUSD <span>65,610.65</span></li>
@@ -35,7 +39,9 @@
 </div>
 
 <script>
+    // JavaScript to switch between tabs
     function switchTab(tab) {
+        // Show or hide the symbol lists based on selected tab
         if (tab === 'favorites') {
             document.getElementById('favorites-list').style.display = 'block';
             document.getElementById('all-symbols-list').style.display = 'none';
@@ -44,13 +50,16 @@
             document.getElementById('all-symbols-list').style.display = 'block';
         }
 
+        // Update the active tab styling
         const tabs = document.querySelectorAll(".tab");
         tabs.forEach(tab => tab.classList.remove("active-tab"));
         document.getElementById(tab + '-tab').classList.add("active-tab");
     }
 
+    // Initial tab is "Favorites"
     switchTab('favorites');
 
+    // Search functionality to filter symbols
     function filter() {
         const searchQuery = document.getElementById('search').value.toLowerCase();
         const symbolItems = document.querySelectorAll('.symbol-item');
