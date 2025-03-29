@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* Simplified Icon Sidebar */
+        .icon-sidebar {
+            width: 60px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            border-right: 1px solid #e1e5eb;
+        }
+        .icon-sidebar a {
+            color: #64748b;
+            font-size: 20px;
+            padding: 15px 0;
+            text-align: center;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .icon-sidebar a:hover {
+            background-color: #f1f5f9;
+            color: #3b82f6;
+        }
+        .icon-sidebar a.active {
+            color: #3b82f6;
+            border-left: 3px solid #3b82f6;
+        }
+        
+        /* Main Sidebar with Segmented Symbols */
+        .main-sidebar {
+            width: 280px;
+            background-color: #ffffff;
+            padding: 0;
+            overflow-y: auto;
+            border-right: 1px solid #e1e5eb;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Top Price Display Row */
+        .price-display-row {
+            display: flex;
+            padding: 15px;
+            border-bottom: 1px solid #e1e5eb;
+        }
+        .price-display-column {
+            flex: 1;
+            padding: 0 10px;
+        }
+        .price-display-column h2 {
+            font-size: 14px;
+            margin: 0 0 5px 0;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .price-display-column h5 {
+            font-size: 16px;
+            margin: 0;
+            color: #3b82f6;
+            font-weight: 600;
+            border-right: 1px solid #0e62e0;
+        }
+        
+        /* Search Bar with Icon */
+        .search-bar {
+            padding: 15px;
+            border-bottom: 1px solid #e1e5eb;
+            position: relative;
+        }
+        .search-bar input {
+            width: 80%;
+            padding: 8px 12px 8px 35px;
+            border: 1px solid #e1e5eb;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+        }
+        .search-bar input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+        .search-bar .search-icon {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        
+        /* Segment Control */
+        .segment-control {
+            display: flex;
+            border-bottom: 1px solid #e1e5eb;
+            margin: 0 15px;
+        }
+        .segment-btn {
+            flex: 1;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .segment-btn.active {
+            color: #3b82f6;
+        }
+        .segment-btn.active:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #3b82f6;
+        }
+        
+        /* Symbol Lists - 3 Column Layout with Spacing */
+        .symbol-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 15px;
+        }
+        .symbol-section {
+            display: none;
+        }
+        .symbol-section.active {
+            display: block;
+        }
+        .symbol-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+            width: 100%;
+        }
+        .symbol-list li {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            padding: 12px 0; /* Increased padding for more spacing */
+            margin: 5px 0; /* Added margin between rows */
+            align-items: center;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .symbol-list li:hover {
+            background-color: #f8fafc;
+        }
+        .symbol-name {
+            font-weight: 500;
+            color: #1e293b;
+        }
+        .price {
+            font-family: 'Arial', sans-serif;
+            text-align: right;
+        }
+        .price.up {
+            color: #3b82f6;
+        }
+        .price.down {
+            color: #ec4899;
+        }
+        .price.neutral {
+            color: #64748b;
+        }
+        
+        /* Main Dashboard Content */
+        .dashboard {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f5f7fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Icon Navigation Sidebar -->
+    <div class="icon-sidebar">
+        <a href="#" class="active" title="Dashboard"><i class="fas fa-chart-line"></i></a>
+        <a href="#" title="Trade"><i class="fas fa-exchange-alt"></i></a>
+        <a href="#" title="History"><i class="fas fa-history"></i></a>
+        <a href="#" title="Graphs"><i class="fas fa-chart-bar"></i></a>
+        <a href="#" title="Saved"><i class="fas fa-bookmark"></i></a>
+        <a href="#" title="Settings"><i class="fas fa-cog"></i></a>
+    </div>
+    
+    <!-- Main Sidebar with Symbols -->
+    <div class="main-sidebar">
+        <!-- Price Display Row -->
+        <div class="price-display-row">
+            <div class="price-display-column">
+                <h2>XAUUSD</h2>
+                <h5>$2324</h5>
+            </div>
+            <div class="price-display-column">
+                <h2>BTCUSD</h2>
+                <h5>$65190</h5>
+            </div>
+        </div>
+
+        <!-- Search Bar with Icon -->
+        <div class="search-bar">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search symbols...">
+        </div>
+        
+        <div class="segment-control">
+            <div class="segment-btn active" onClick="showSymbols('favorites')">Favorites</div>
+            <div class="segment-btn" onClick="showSymbols('all')">All Symbols</div>
+        </div>
+        
+        <div class="symbol-container">
+            <!-- Favorites Section -->
+            <div class="symbol-section active" id="favorites-section">
+                <ul class="symbol-list">
+                    <li>
+                        <span class="symbol-name">BTCUSD</span>
+                        <span class="price up">$65,950.15</span>
+                        <span class="price up">+1.25%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">AUDCAD</span>
+                        <span class="price">$0.9065</span>
+                        <span class="price down">-0.32%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">XAUUSD</span>
+                        <span class="price up">$2,324.16</span>
+                        <span class="price up">+0.87%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">NGAS</span>
+                        <span class="price">$2.312</span>
+                        <span class="price down">-1.15%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">EURUSD</span>
+                        <span class="price up">$1.0915</span>
+                        <span class="price up">+0.12%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">GBPUSD</span>
+                        <span class="price">$1.2632</span>
+                        <span class="price neutral">0.00%</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- All Symbols Section -->
+            <div class="symbol-section" id="all-section">
+                <ul class="symbol-list">
+                    <li>
+                        <span class="symbol-name">BTCUSD</span>
+                        <span class="price up">$65,950.15</span>
+                        <span class="price up">+1.25%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">ETHUSD</span>
+                        <span class="price up">$3,312.45</span>
+                        <span class="price up">+2.15%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">XAUUSD</span>
+                        <span class="price up">$2,324.16</span>
+                        <span class="price up">+0.87%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">XAGUSD</span>
+                        <span class="price down">$26.18</span>
+                        <span class="price down">-0.45%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">NGAS</span>
+                        <span class="price down">$2.312</span>
+                        <span class="price down">-1.15%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">EURUSD</span>
+                        <span class="price up">$1.0915</span>
+                        <span class="price up">+0.12%</span>
+                    </li>
+                    <li>
+                        <span class="symbol-name">GBPUSD</span>
+                        <span class="price">$1.2632</span>
+                        <span class="price neutral">0.00%</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Dashboard Content -->
+    <div class="dashboard">
+        <!-- Your dashboard content here -->
+    </div>
+
+    <script>
+        function showSymbols(section) {
+            // Update segment buttons
+            document.querySelectorAll('.segment-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show selected section
+            document.querySelectorAll('.symbol-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(section + '-section').classList.add('active');
+        }
+    </script>
+</body>
+</html>
