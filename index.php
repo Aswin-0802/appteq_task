@@ -278,7 +278,43 @@
 </div>
 </div>
 
-<script src="script.js"></script>
-
 </body>
 </html>
+<script>
+	
+// for toggle
+function showSymbols(segment) {
+    const segmentBtns = document.querySelectorAll('.segment-btn');
+    segmentBtns.forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    const activeBtn = document.querySelector(`.segment-btn[onClick="showSymbols('${segment}')"]`);
+    activeBtn.classList.add('active');
+
+    const sections = document.querySelectorAll('.symbol-section');
+    sections.forEach(section => {
+        section.classList.remove('active');
+    });
+
+    const selectedSection = document.getElementById(`${segment}-section`);
+    selectedSection.classList.add('active');
+}
+// for search
+document.getElementById('search').addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    
+    const symbolNames = document.querySelectorAll('.symbol-name');
+    
+    symbolNames.forEach(symbol => {
+        const symbolText = symbol.textContent.toLowerCase();
+        
+        if (symbolText.includes(searchTerm)) {
+            symbol.closest('li').style.display = ''; 
+        } else {
+            symbol.closest('li').style.display = 'none'; 
+        }
+    });
+});
+
+</script>
