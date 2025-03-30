@@ -26,7 +26,6 @@
 	</div>
 </div>
 
-<!-- Search Bar with Icon -->
 <div class="search-bar">
 	<i class="fas fa-search search-icon"></i>
 	<input type="text" class="search-box" id="search" placeholder="Search">
@@ -38,7 +37,6 @@
 </div>
 
 <div class="symbol-container">
-	<!-- Favorites Section -->
 	<div class="symbol-section active symbol-list" id="favorites-section">
 		<ul class="symbol-list">
 			<li>
@@ -109,7 +107,6 @@
 		</ul>
 	</div>
 	
-	<!-- All Symbols Section -->
 	<div class="symbol-section symbol-list" id="all-section">
 		<ul class="symbol-list">
 			<li>
@@ -281,7 +278,7 @@
 </body>
 </html>
 <script>
-	
+
 // for toggle
 function showSymbols(segment) {
     const segmentBtns = document.querySelectorAll('.segment-btn');
