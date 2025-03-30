@@ -1,10 +1,21 @@
+/* Full-width Sidebar with Three-dot Menu */
 * { 
   box-sizing: border-box; 
   margin: 0; 
   padding: 0; 
   font-family: Arial, sans-serif; 
-  font-size: 13px;
+  font-size: 12px;
 }
+
+a i {
+  font-size: 18px; /* Adjust size as needed */
+}
+
+li {
+    font-size: 10px; /* Adjust the font size as needed */
+    line-height: 1.0; /* Decrease the height of each line */
+}
+
 
 body { 
   display: flex; 
@@ -13,78 +24,85 @@ body {
   background: #f4f4f4; 
   overflow: hidden;
 }
-
-#sidebar-container {
-  display: flex;
-  flex-direction: column; 
-  height: 100vh; 
-  width: 23%; /* Set sidebar to 25% */
+.icon-sidebar {
+    width: 4%;
+    height: 100vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 65px;
+    border-right: 1px solid #e1e5eb;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10; /* Ensure it stays on top */
 }
 
-.sidebar { 
-  width: 100%; 
-  background: #fff; 
-  padding: 15px; 
-  overflow-y: auto; 
-  border-right: 1px solid #ddd; 
-  height: 100%; 
+.icon-sidebar a {
+    color: #64748b;
+    font-size: 20px;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.search-container { 
-  position: relative; 
-  margin-bottom: 10px; 
+.icon-sidebar a:hover {
+    background-color: #f1f5f9;
+    color: #3b82f6;
 }
 
-.search-box { 
-  padding: 8px 30px 8px 10px; 
-  border: 1px solid #ccc; 
-  border-radius: 4px; 
-  width: 100%; 
+.icon-sidebar a.active {
+    color: #d43bf6;
+    border-bottom: 3px solid #c93bf6;
 }
 
-.search-icon { 
-  position: absolute; 
-  right: 10px; 
-  top: 50%; 
-  transform: translateY(-50%); 
-  color: #777; 
+/* Push the last icon (menu button) to the bottom */
+.icon-sidebar .menu-button {
+    margin-top: auto;
+    border-top: 1px solid #e1e5eb; /* Add top border */
+    width: 100%;
 }
 
-.tab-container { 
-  display: flex; 
-  justify-content: space-between; 
-  margin-bottom: 10px; 
+/* Three-dot menu at the bottom */
+.menu-icon {
+    margin-top: auto;
+    padding-bottom: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #64748b;
+    transition: color 0.3s;
 }
 
-.tab { 
-  cursor: pointer; 
-  padding: 8px; 
-  flex: 1; 
-  text-align: center; 
-  border-bottom: 2px solid transparent; 
+.menu-icon:hover {
+    color: #3b82f6;
 }
 
-.active-tab { 
-  border-bottom: 2px solid #007bff; 
+/* Main Sidebar - 23% */
+.main-sidebar {
+    width: 20%;
+    background: #ffffff;
+    border-right: 1px solid #e1e5eb;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 4%; /* Move it to the right of icon-sidebar */
+    z-index: 5;
 }
 
-.symbol-list { 
-  list-style: none; 
-  padding: 0; 
-}
-
-.symbol-item { 
-  display: flex; 
-  justify-content: space-between; 
-  padding: 5px 0; 
-}
-
+/* Main Content - 73% */
 .main-content { 
   flex-grow: 1; 
   padding: 15px; 
   height: 100%; 
   overflow-y: auto; 
-  width: 73%; /* Set main content to 75% */
+  width: 76%; /* Set main content to 73% */
+  margin-left: 4%; /* Adjust to prevent overlap */
 }
 
 .header { 
@@ -111,6 +129,7 @@ table {
 th, td { 
   padding: 8px; 
   text-align: left; 
+  font-size:12px;
   border-bottom: 1px solid #ddd; 
 }
 
@@ -163,7 +182,7 @@ th {
   body {
     flex-direction: column;
   }
-  #sidebar-container {
+  .icon-sidebar, .main-sidebar {
     width: 100%;
   }
   .sidebar {
@@ -177,7 +196,7 @@ th {
     flex-direction: column;
     overflow-y: auto;
   }
-  #sidebar-container {
+  .icon-sidebar, .main-sidebar {
     width: 100%;
     height: auto; 
   }
@@ -229,7 +248,7 @@ th {
   margin-right: 10px;
   border-radius: 3px;
   padding: 7px 15px; 
-  font-size: 13px;
+  font-size: 11px;
   display: flex;
   align-items: center; 
   justify-content: center; 
@@ -259,4 +278,158 @@ th {
 .sell {
   background-color: #FFCDD2; 
   color: #B71C1C; 
+}
+
+.price-display-row {
+	display: flex;
+	border-bottom: 2px solid #e1e5eb;
+	padding-bottom:5%;
+}
+.price-display-column {
+	flex: 1;
+	padding-left: 30px;
+}
+.price-display-column h2 {
+	font-size: 12px;
+	margin: 0 0 5px 0;
+	color: #64748b;
+	font-weight: 500;
+}
+.price-display-column h5 {
+	font-size: 12px;
+	margin: 0;
+	color: #3b82f6;
+	font-weight: 600;
+}
+
+/* Search Bar with Icon */
+.search-bar {
+	padding: 15px;
+	border-bottom: 1px solid #e1e5eb;
+	position: relative;
+}
+.search-bar input {
+	width: 100%;
+	padding: 8px 12px 8px 35px;
+	border: 1px solid #e1e5eb;
+	border-radius: 6px;
+	font-size: 13px;
+	outline: none;
+}
+.search-bar input:focus {
+	border-color: #3b82f6;
+	box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+.search-bar .search-icon {
+	position: absolute;
+	left: 25px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #94a3b8;
+	font-size: 14px;
+}
+
+/* Segment Control */
+.segment-control {
+	display: flex;
+	border-bottom: 1px solid #e1e5eb;
+	margin: 0 15px;
+}
+.segment-btn {
+	flex: 1;
+	padding: 12px 0;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 500;
+	color: #64748b;
+	cursor: pointer;
+	transition: all 0.2s;
+	position: relative;
+}
+.segment-btn.active {
+	color: #3b82f6;
+}
+.segment-btn.active:after {
+	content: '';
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background-color: #3b82f6;
+}
+
+/* Symbol Lists - 3 Column Layout with Spacing */
+.symbol-container {
+	flex: 1;
+	overflow-y: auto;
+	padding: 0 15px;
+}
+.symbol-section {
+	display: none;
+}
+.symbol-section.active {
+	display: block;
+}
+.symbol-list {
+	list-style: none;
+	padding: 0;
+	margin: 1px 0;
+	width: 100%;
+}
+.symbol-list li {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 8px;
+	padding: 8px 0; /* Increased padding for more spacing */
+	margin: 5px 0; /* Added margin between rows */
+	align-items: center;
+	cursor: pointer;
+	font-size: 12px;
+	transition: all 0.2s;
+	border-bottom: 1px solid #f1f5f9;
+}
+.symbol-list li:hover {
+	background-color: #f8fafc;
+}
+.symbol-name {
+	font-weight: 500;
+	color: #1e293b;
+}
+.price {
+	text-align: right;
+	color: blue;
+}
+.price.neutral {
+	color: red;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    border: none;
+    color: black;
+    padding: 4px 7px;
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination-btn:hover {
+    background-color: #0099FF;
+}
+
+.pagination-btn:focus {
+    outline: none;
+}
+
+small {
+    font-size: 0.8em;        
+    color: #888;             
+    margin-top: 3px;                
+    display: inline-block;   
 }

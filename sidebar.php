@@ -1,67 +1,25 @@
-
-<div class="sidebar">
-    <div class="search-container">
-        <input type="text" class="search-box" id="search" placeholder="Search symbol..." onkeyup="filter()">
-        <span class="search-icon">🔍</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="icon-sidebar">
+        <a href="#" class="active" title="Booknark" style="border-top:1px solid #e1e5eb"><i class="fa-regular fa-bookmark"></i></a>
+        <a href="#" title="Chart"><i class="fa fa-line-chart"></i></a>
+        <a href="#" title="Briefcase"><i class="fa-solid fa-briefcase"></i></a>
+        <a href="#" title="History"><i class="fas fa-history"></i></a>
+		<a href="#" title="Code"><i class="fas fa-code"></i></a>
+		<a href="#" title="Code"><i class="fa-solid fa-user-group"></i></a>		
+        <a href="#" title="Dollar"><i class="fas fa-dollar-sign"></i></a>
+		<a href="#" title="Crown"><i class="fa-solid fa-crown"></i></a>
+        <a href="#" title="Graduation"><i class="fa-solid fa-graduation-cap"></i></a>
+		<a href="#" title="Graduation"><i class="fa-solid fa-user-tie"></i></a>
+		<a href="#" class="menu-button" title="Menu"><i class="fa-solid fa-bars"></i></a>
     </div>
-    <div class="tab-container">
-        <div class="tab active-tab" id="favorites-tab" onclick="switchTab('favorites')">Favorites</div>
-        <div class="tab" id="all-symbols-tab" onclick="switchTab('all-symbols')">All Symbols</div>
-    </div>
-
-    <div class="symbol-list" id="favorites-list">
-        <ul>
-            <li class="symbol-item">BTCUSD <span>65,610.65</span></li>
-            <li class="symbol-item">AUDCAD <span>0.90669</span></li>
-            <li class="symbol-item">NGAS <span>2.728</span></li>
-            <li class="symbol-item">XAUUSD <span>2,324.16</span></li>
-        </ul>
-    </div>
-
-    <div class="symbol-list" id="all-symbols-list" style="display: none;">
-        <ul>
-            <li class="symbol-item">BTCUSD <span>65,610.65</span></li>
-            <li class="symbol-item">AUDCAD <span>0.90669</span></li>
-            <li class="symbol-item">NGAS <span>2.728</span></li>
-            <li class="symbol-item">XAUUSD <span>2,324.16</span></li>
-            <li class="symbol-item">EURUSD <span>1.1023</span></li>
-            <li class="symbol-item">GBPUSD <span>1.2345</span></li>
-            <li class="symbol-item">USDJPY <span>109.85</span></li>
-            <li class="symbol-item">OILUSD <span>74.90</span></li>
-            <li class="symbol-item">SPX500 <span>4,133.25</span></li>
-            <li class="symbol-item">DAX30 <span>15,100.50</span></li>
-        </ul>
-    </div>
-</div>
-
-<script>
-    function switchTab(tab) {
-        if (tab === 'favorites') {
-            document.getElementById('favorites-list').style.display = 'block';
-            document.getElementById('all-symbols-list').style.display = 'none';
-        } else if (tab === 'all-symbols') {
-            document.getElementById('favorites-list').style.display = 'none';
-            document.getElementById('all-symbols-list').style.display = 'block';
-        }
-
-        const tabs = document.querySelectorAll(".tab");
-        tabs.forEach(tab => tab.classList.remove("active-tab"));
-        document.getElementById(tab + '-tab').classList.add("active-tab");
-    }
-
-    switchTab('favorites');
-
-    function filter() {
-        const searchQuery = document.getElementById('search').value.toLowerCase();
-        const symbolItems = document.querySelectorAll('.symbol-item');
-        
-        symbolItems.forEach(item => {
-            const symbolText = item.textContent.toLowerCase();
-            if (symbolText.includes(searchQuery)) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-</script>
+</body>
+</html>
